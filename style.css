@@ -24,7 +24,7 @@ body {
 }
 header {
   position: absolute;
-  top: 2rem;
+  top: 1rem;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -39,10 +39,12 @@ header p {
   width: 27rem;
   height: 27rem;
   border-radius: var(--rounded);
-  margin: 2.5rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0 5px var(--light-dark), inset 0 0 5px var(--light-dark);
+  cursor: pointer;
+
 }
 .clock {
   position: relative;
@@ -56,6 +58,7 @@ header p {
   align-items: center;
   margin-right: auto;
   margin-left: auto;
+  
 }
 
 .clock::before {
@@ -255,5 +258,41 @@ article::before {
 }
 article::after {
   left: 11rem;
-  width: 20rem;
+  width: 18rem;
+}
+/*-------------------- Footer */
+footer {
+  text-align: center;
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.7rem;
+  gap: 1rem;
+}
+footer #digitalClock {
+  box-shadow: 0 0 2px var(--light-dark);
+  width: fit-content;
+  padding: .5rem 2rem;
+  border-radius: 5px;
+  box-shadow: 0 0 3px var(--light-dark), inset 0 0 5px var(--light-dark);
+  position: relative;
+  font-size: 2rem;
+  color: var(--light-dark);
+  
+}
+footer #digitalClock::before {
+  content: "";
+  position: absolute;
+  width: 3rem;
+  height: .5rem;
+  box-shadow: 0 0 3px var(--light-dark), inset 0 0 5px #222;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%); 
+}
+footer .time {
+  color: var(--light-dark);
+  text-shadow: 0 0 2px  #999
 }
