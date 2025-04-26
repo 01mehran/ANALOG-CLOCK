@@ -42,7 +42,6 @@ header p {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 5px var(--light-dark), inset 0 0 5px var(--light-dark);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
