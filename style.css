@@ -231,7 +231,7 @@ header p {
 article {
   right: 0;
   top: 50%;
-  transform: translate(90px, -50%) rotate(-90deg);
+  transform: translate(125px, -50%) rotate(-90deg);
   text-align: center;
   width: fit-content;
   position: absolute;
@@ -244,16 +244,16 @@ article::before,
 article::after {
   content: "";
   position: absolute;
-  width: 23rem;
   height: 3px;
-  top: 22px;
+  top: 18px;
   background-color: var(--light-dark);
   border-radius: 2px;
 }
 article::before {
   left: -26rem;
+  width: 23rem;
 }
 article::after {
   left: 11rem;
+  width: 20rem;
 }
-
