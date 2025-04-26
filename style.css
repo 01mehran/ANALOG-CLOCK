@@ -1,8 +1,8 @@
 /* Link */
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
 /* Customizing */
-:root  {
-    --light-dark: #444;
+:root {
+  --light-dark: #444;
   --red: rgb(230, 48, 48);
   --rounded: 50%;
 }
@@ -24,10 +24,8 @@ body {
 }
 
 .container {
-  max-width: 27rem;
-  max-height: 27rem;
-  width: 90vw;
-  height: 90vw;
+  width: 27rem;
+  height: 27rem;
   border-radius: var(--rounded);
   margin: 2.5rem auto;
   display: flex;
@@ -36,12 +34,16 @@ body {
 }
 .clock {
   position: relative;
-  width: 23rem;
-  height: 23rem;
+  max-width: 23rem;
+  max-height: 23rem;
+  width: 90vw;
+  height: 90vw;
   border-radius: var(--rounded);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right:auto ;
+  margin-left:auto ;
 }
 
 .clock::before {
@@ -209,7 +211,7 @@ body {
   top: -10px;
   border-radius: 10px;
   width: 14px;
-  height:80px;
+  height: 80px;
   background-color: var(--light-dark);
   transform: translateX(-50%);
 }
