@@ -1,0 +1,215 @@
+/* Link */
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
+/* Customizing */
+:root  {
+    --light-dark: #444;
+  --red: rgb(230, 48, 48);
+  --rounded: 50%;
+}
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  font-family: "EB Garamond", serif;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  max-width: 27rem;
+  max-height: 27rem;
+  width: 90vw;
+  height: 90vw;
+  border-radius: var(--rounded);
+  margin: 2.5rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clock {
+  position: relative;
+  width: 23rem;
+  height: 23rem;
+  border-radius: var(--rounded);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background-color: var(--light-dark);
+  border-radius: var(--rounded);
+  z-index: 10;
+}
+
+.clock::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: var(--rounded);
+  z-index: 10;
+}
+/* ---------------- Wrappers */
+.clock .hours__wrapper,
+.clock .seconds__wrapper {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--rounded);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*------- Create Hours Number */
+.clock .hours__wrapper span {
+  position: absolute;
+  inset: 6px;
+  transform: rotate(calc(var(--index) * 30deg));
+}
+
+.clock .hours__wrapper span p {
+  font-size: 3rem;
+  display: inline-block;
+  transform: rotate(calc(var(--index) * -30deg));
+  color: var(--light-dark);
+}
+
+/* -------Create Seconds Bar */
+.clock .seconds__wrapper span {
+  position: absolute;
+  inset: -15px;
+  text-align: center;
+  transform: rotate(calc(var(--index) * 6deg));
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.clock .seconds__wrapper span p {
+  position: absolute;
+  width: 2px;
+  height: 12px;
+  border-radius: 3px;
+  background-color: var(--light-dark);
+  display: inline-block;
+}
+.clock .seconds__wrapper span:nth-child(5n) p {
+  width: 4px;
+  height: 1rem;
+  transform: translateY(2px);
+}
+
+/* Create Hands Wrapper*/
+.hands__wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hands__wrapper .hand {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* -----Seconds */
+.hands__wrapper .second {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.hands__wrapper .second i {
+  position: relative;
+  width: 5px;
+  height: calc(350px / 2 + 50px);
+  background-color: var(--red);
+  border-radius: 10px;
+}
+
+.hands__wrapper .second i::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  border-radius: 10px;
+  width: 12px;
+  height: 40px;
+  background-color: var(--red);
+  transform: translateX(-50%);
+}
+
+/* -------Minutes */
+.hands__wrapper .minute {
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.hands__wrapper .minute i {
+  width: 7px;
+  height: calc(290px / 2);
+  background-color: var(--light-dark);
+  border-radius: 10px;
+}
+.hands__wrapper .minute i::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 120px;
+  border-radius: 10px;
+  background-color: var(--light-dark);
+}
+
+/* ----------hours */
+.hands__wrapper .hour {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.hands__wrapper .hour i {
+  width: 7px;
+  height: calc(180px / 2);
+  background-color: var(--light-dark);
+  border-radius: 10px;
+}
+.hands__wrapper .hour i::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  border-radius: 10px;
+  width: 14px;
+  height:80px;
+  background-color: var(--light-dark);
+  transform: translateX(-50%);
+}
