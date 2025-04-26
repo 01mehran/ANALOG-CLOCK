@@ -22,7 +22,19 @@ body {
   align-items: center;
   height: 100vh;
 }
-
+header {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+}
+header p {
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--light-dark);
+}
 .container {
   width: 27rem;
   height: 27rem;
@@ -42,8 +54,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right:auto ;
-  margin-left:auto ;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .clock::before {
