@@ -1,69 +1,20 @@
 "use strict";
-// Selecting Elements;
-const hoursWrapper = document.querySelector(".hours__wrapper");
-const secondsWrapper = document.querySelector(".seconds__wrapper");
-const container = document.querySelector(".container");
 
-//---------------------- Create hours number;
-let hoursNumberWrapper = [];
-
-for (let i = 1; i <= 12; i++) {
-  hoursNumberWrapper.push(`<span style="--index:${i}"><p>${i}</p></span>`);
-}
-hoursWrapper.insertAdjacentHTML("afterbegin", hoursNumberWrapper.join(""));
-
-//-------------------- Create Seconds bar;
-let secondsBarWrapper = [];
-
-for (let i = 1; i <= 60; i += 1) {
-  secondsBarWrapper.push(`<span style="--index: ${i}"><p></p></span>`);
-}
-secondsWrapper.insertAdjacentHTML("afterbegin", secondsBarWrapper.join(""));
-
-//------------------ Time;
-const hour = document.querySelector(".hour");
-const minute = document.querySelector(".minute");
-const seconds = document.querySelector(".second");
-const Time = () => {
-  const date = new Date();
-  const currentHours = date.getHours();
-  const currentMinutes = date.getMinutes();
-  const currentSeconds = date.getSeconds();
-
-  hour.style.transform = `rotate(${currentHours * 30 + currentMinutes / 2}deg)`;
-  minute.style.transform = `rotate(${currentMinutes * 6}deg)`;
-
-  seconds.style.transform = `rotate(${currentSeconds * 6}deg)`;
+// Selecting Elements
+const elements = {
+  hoursWrapper: document.querySelector(".hours__wrapper"),
+  secondsWrapper: document.querySelector(".seconds__wrapper"),
+  container: document.querySelector(".container"),
+  hour: document.querySelector(".hour"),
+  minute: document.querySelector(".minute"),
+  second: document.querySelector(".second"),
+  displayDay: document.querySelector("#displayDay"),
+  displayFullDate: document.querySelector("#displayFullDate"),
+  digitalClock: document.querySelector("#digitalClock"),
 };
-setInterval(Time, 1000);
 
-// ----------- Play Clock Sound Effect;
-let soundInterval = null;
-let isSoundOn = false;
-container.addEventListener("click", () => {
-  isSoundOn = !isSoundOn;
-
-  if (isSoundOn) {
-    if (soundInterval) {
-      clearInterval(soundInterval);
-    }
-    soundInterval = setInterval(() => {
-      const clockSound = new Audio("./sound.wav");
-      clockSound.play();
-    }, 1000);
-  } else if (soundInterval) {
-    clearInterval(soundInterval);
-    soundInterval = null;
-  }
-});
-
-//-------------------- Date, Day, Digital-Clock;
-const displayDay = document.querySelector("#displayDay");
-const displayFullDate = document.querySelector("#displayFullDate");
-
-const time = new Date();
-
-const months = [
+// Constants
+const MONTHS = [
   "January",
   "February",
   "March",
@@ -77,7 +28,7 @@ const months = [
   "November",
   "December",
 ];
-const weekdays = [
+const WEEKDAYS = [
   "Sunday",
   "Monday",
   "Tuesday",
@@ -87,24 +38,78 @@ const weekdays = [
   "Saturday",
 ];
 
-displayDay.innerHTML = `${weekdays[time.getDay()]}`;
-const day = time.getDate() < 10 ? "0" + time.getDate() : time.getDate();
-displayFullDate.innerHTML = `/ ${
-  months[time.getMonth()]
-} / ${day} / ${time.getFullYear()}`;
+// Helper Functions
+function createElements(wrapper, count, elementCreator) {
+  const elements = [];
+  for (let i = 1; i <= count; i++) {
+    elements.push(elementCreator(i));
+  }
+  wrapper.insertAdjacentHTML("afterbegin", elements.join(""));
+}
 
+function formatTime(value) {
+  return value < 10 ? `0${value}` : value;
+}
 
-setInterval(() => {
-  const time = new Date();
-  const digitalClock = document.querySelector("#digitalClock");
+// Create Clock Elements
+createElements(
+  elements.hoursWrapper,
+  12,
+  (i) => `<span style="--index:${i}"><p>${i}</p></span>`
+);
 
-  const hour = time.getHours();
-  const minute = time.getMinutes();
-  const second = time.getSeconds();
+createElements(
+  elements.secondsWrapper,
+  60,
+  (i) => `<span style="--index:${i}"><p></p></span>`
+);
 
-  const currentHour = hour < 10 ? "0" + hour : hour;
-  const currentMinute = minute < 10 ? "0" + minute : minute;
-  const currentSecond = second < 10 ? "0" + second : second;
+// Clock Functionality
+function updateClock() {
+  const date = new Date();
 
-  digitalClock.innerHTML = `${currentHour} : ${currentMinute} : ${currentSecond}`;
-}, 1000);
+  // Analog Clock
+  elements.hour.style.transform = `rotate(${
+    date.getHours() * 30 + date.getMinutes() / 2
+  }deg)`;
+  elements.minute.style.transform = `rotate(${date.getMinutes() * 6}deg)`;
+  elements.second.style.transform = `rotate(${date.getSeconds() * 6}deg)`;
+
+  // Digital Clock
+  elements.digitalClock.innerHTML = `${formatTime(
+    date.getHours()
+  )} : ${formatTime(date.getMinutes())} : ${formatTime(date.getSeconds())}`;
+}
+
+// Date Display
+function updateDate() {
+  const date = new Date();
+  elements.displayDay.textContent = WEEKDAYS[date.getDay()];
+  elements.displayFullDate.innerHTML = `/ ${
+    MONTHS[date.getMonth()]
+  } / ${formatTime(date.getDate())} / ${date.getFullYear()}`;
+}
+
+// Sound Functionality
+let soundInterval = null;
+let isSoundOn = false;
+
+function toggleSound() {
+  isSoundOn = !isSoundOn;
+
+  if (isSoundOn) {
+    if (soundInterval) clearInterval(soundInterval);
+    soundInterval = setInterval(() => {
+      new Audio("./sound.wav").play();
+    }, 1000);
+  } else if (soundInterval) {
+    clearInterval(soundInterval);
+    soundInterval = null;
+  }
+}
+
+// Initialize
+updateClock();
+updateDate();
+setInterval(updateClock, 1000);
+elements.container.addEventListener("click", toggleSound);
